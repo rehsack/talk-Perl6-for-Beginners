@@ -1,0 +1,67 @@
+\begin{frame}[fragile]{Getting \& Installation (Binaries)}
+\begin{block}<1->{macOS \& Windows}
+\begin{itemize}
+\item<1-> Go to \url{https://rakudo.org/files}
+\item<2-> Choose your Operating System or Windows
+\item<3-> Follow the installation instructions for your Operating System or Windows
+\end{itemize}
+\end{block}
+\end{frame}
+
+%\begin{frame}[fragile]{Packages Repository I/II}
+%\begin{block}<1->{*BSD, Linux, \ldots - use package repository}
+%\begin{lstlisting}[language=sh,inputencoding=latin9]
+%nbsd   $ export PKG_PATH="http://cdn.NetBSD.org/pub/\
+%         pkgsrc/packages/OPSYS/ARCH/VERSIONS/All/"
+%fbsd   $ # pkg knows it's repository
+%obsd   $ export PKG_PATH=scp://user@company-build-\
+%         server/usr/ports/packages/\%a/all:\
+%	 https://trusted-public-server/\%m:\
+%	 installpath
+%debian $ sudo apt-get -y update
+%centos $ # yum updates repositories automatically
+%suse   $ sudo zypper refresh
+%\end{lstlisting}
+%\end{block}
+%\end{frame}
+%
+%\begin{frame}[fragile]{Packages Repository II/II}
+%\begin{block}<1->{*BSD, Linux, \ldots - install from package repository}
+%\begin{lstlisting}[language=sh,inputencoding=latin9]
+%nbsd   $ sudo pkg_add rakudo-star
+%fbsd   $ sudo pkg install rakudo-star
+%obsd   $ sudo pkg_add rakudo-star
+%debian $ sudo apt-get install rakudo-star
+%centos $ sudo yum install rakudo star
+%suse   $ sudo zypper install rakudo-star
+%\end{lstlisting}
+%\end{block}
+%\end{frame}
+%
+%\begin{frame}[fragile]{Install from Source}
+%\begin{block}<1->{Install Rakudo Star from Source}
+%There is an excellent guide at \url{https://rakudo.org/files/star/source}
+%for most widely used operating system distributions. \uncover<2->{Since
+%there is the source download included, an offline copy doesn't make much
+%sense.}
+%
+%\uncover<3->{\textrightarrow DVD distributors might ask for an offline copy
+%for the targeted audience.}
+%\end{block}
+%\end{frame}
+%
+%\begin{frame}[fragile]{Manage multiple Rakudo Installations}
+%\begin{block}<1->{Brewing continues \ldots}
+%\begin{itemize}
+%\item<1-> Visit \url{https://github.com/tadzik/rakudobrew}
+%\item<2-> Install \texttt{git} unless already available
+%\item<3-> run \lstinline[language=sh,inputencoding=latin9]!git clone https://github.com/tadzik/rakudobrew ~/.rakudobrew!
+%(Windows users might prefer \lstinline[language=sh,inputencoding=latin9]!%USERPROFILE%\rakudobrew!
+%instead of \lstinline[language=sh,inputencoding=latin9]!~/.rakudobrew! in this \uncover<4->{and next command})
+%\item<4-> run ~/.rakudobrew/bin/init! as described in \texttt{README.md}, e.g.
+%\lstinline[language=sh,inputencoding=latin9]!echo 'eval "$(~/.rakudobrew/bin/rakudobrew init Bash)"' \!
+%\lstinline[language=sh,inputencoding=latin9]!  >> ~/.profile!
+%\end{itemize}
+%\end{block}
+%\end{frame}
+

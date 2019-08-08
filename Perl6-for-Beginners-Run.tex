@@ -1,0 +1,50 @@
+\subsection{Running Perl 6}
+
+\begin{frame}[fragile]{Starting Perl 6 Program}
+\begin{block}<1->{How to run Perl 6 Programs}
+\begin{itemize}
+\item<1-> Run explicitely with compiler:
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+sno@ernie$ perl6 prog.p6
+\end{lstlisting}
+\item<2-> Run self-contained
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+sno@ernie$ head -n1 ./prog.p6
+#!/opt/pkg/bin/perl6
+sno@ernie$ chmod +x ./prog.p6
+sno@ernie$ ./prog.p6
+\end{lstlisting}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Starting Program With Parameters}
+\begin{block}<1->{How to run Perl 6 Programs With Parameters}
+\begin{itemize}
+\item<1-> Run explicitely with compiler:
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+sno@ernie$ perl6 prog.p6 --arg1 --arg2=val pos_arg
+\end{lstlisting}
+\item<2-> Run self-contained
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+sno@ernie$ head -n1 ./prog.p6
+#!/opt/pkg/bin/perl6
+sno@ernie$ chmod +x ./prog.p6
+sno@ernie$ ./prog.p6 --arg1 --arg2=val pos_arg
+\end{lstlisting}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Starting Perl6 with Parameters}
+\begin{block}<1->{Starting Perl6 with Parameters}
+\begin{itemize}
+\item<1-> Perl 6 specifies in \url{https://github.com/perl6/specs/blob/master/S19-commandline.pod}
+which parameters are available and what they do.
+\item<2-> A more detailed \burlalt{https://github.com/perl6/specs/blob/master/S19-commandline.pod#Option-Reference}{Option Reference} is available later on that page - so scroll down and read until the end!
+\item<3-> However, Rakudo implements some options (\texttt{-M}) and refuses some options (\texttt{-F}) - so always refer to \lstinline[language=sh,inputencoding=latin9]!perl6 --help!
+\item<4-> Change perspective: Some things are better solved differently than adding options \lstinline[language=sh,inputencoding=latin9]!perl6-debug ./prog.p6! replaces \lstinline[language=sh,inputencoding=latin9]!perl -d ./prog.pl!
+\end{itemize}
+\end{block}
+\end{frame}
+

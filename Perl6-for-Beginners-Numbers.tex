@@ -1,0 +1,117 @@
+\subsection{Numbers}
+
+\begin{frame}[fragile]{Int/Num Literals}
+\begin{block}<1->{Numbers -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+say 10_(*@\pnode(0,0){B1}{}@*)00(*@\pnode(0,0){A1}{}@*)000 == 1_(*@\pnode(0,0){B2}{}@*)000(*@\pnode(0,0){A2}{}@*)_(*@\pnode(0,0){B3}{}@*)000;
+say 1000(*@\pnode(0,0){A3}{}@*)000 - 1e(*@\pnode(0,0){A4}{}@*)6;
+my $db = 0x(*@\pnode(0,0){C}{}@*)deadbeef;
+chmod 0o(*@\pnode(0,0){D}{}@*)644, $?FILE;
+say 0o755 - :(*@\pnode(0,0){E}{}@*)3<200021>;
+say -(*@\pnode(0,0){F}{}@*)42;
+\end{lstlisting}
+
+\end{block}
+
+\begin{itemize}
+\item<2-> Four ways to note your first \rnode{a}{million} \uncover<3->{- mind the \rnode{b}{underscore} don't carry any semantic information}
+\item<4-> Integer in \rnode{c}{hexadecimal} notation
+\item<5-> \ldots and as typical in such a situation an \rnode{d}{octal} value
+\item<6-> \rnode{e}{arbitary} bases can be used, too
+\item<7-> \rnode{f}{unary operator} applied to literal \ldots but nitpicking
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A1}\nccurve[linecolor=teal]{->}{a}{A2}\nccurve[linecolor=teal]{->}{a}{A3}\nccurve[linecolor=teal]{->}{a}{A4}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B1}\nccurve[linecolor=teal]{->}{b}{B2}\nccurve[linecolor=teal]{->}{b}{B3}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{e}{E}}
+\uncover<7>{\nccurve[linecolor=teal]{->}{f}{F}}
+\end{frame}
+
+\begin{frame}[fragile]{Complex Literals}
+\begin{block}<1->{Numbers -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+say (*@\pnode(0,0){A}{}@*)i;
+say (*@\pnode(0,0){B}{}@*)17i;
+say (*@\pnode(0,0){C}{}@*)47+11i;
+say -4+(*@\pnode(0,0){D}{}@*)Inf\i;
+say 13-(*@\pnode(0,0){E}{}@*)8i;
+say 2*(*@\pnode(0,0){F}{}@*)-3-2i;
+say 2*(*@\pnode(0,0){G}{}@*)<-3-2i>;
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{\texttt{0+1i}} - square root of \texttt{-1}
+\item<3-> \rnode{b}{\texttt{0+17i}} - only the imaginary part
+\item<4-> \rnode{c}{\texttt{47+11i}} - half real and half imaginary Genuine Eau de Cologne
+\item<5-> \rnode{d}{\texttt{-4+Inf\textbackslash{}i}} - negative complex number with infinity imaginary part
+\item<6-> \rnode{e}{\texttt{13-8i}} - positive complex number with negative imaginary part
+\item<7-> \rnode{f}{\texttt{-6-2i}} - not a literal but mind operator precedence
+\item<8-> \rnode{g}{\texttt{-6-4i}} - or better write complex number as literal
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{e}{E}}
+\uncover<7>{\nccurve[linecolor=teal]{->}{f}{F}}
+\uncover<8>{\nccurve[linecolor=teal]{->}{g}{G}}
+\end{frame}
+
+\begin{frame}[fragile]{Rational Literals}
+\begin{block}<1->{Numbers -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $p = 3.1415(*@\pnode(0,0){A3}{}@*)9265; $p = pi(*@\pnode(0,0){A1}{}@*); $p = π(*@\pnode(0,0){A2}{}@*);
+my $t = τ(*@\pnode(0,0){B}{}@*);
+my $e = e(*@\pnode(0,0){C}{}@*);
+say ½(*@\pnode(0,0){D}{}@*).perl, ", ", <1/(*@\pnode(0,0){E}{}@*)7>.perl;
+\end{lstlisting}
+
+\end{block}
+
+\begin{itemize}
+\item<2-> Calculate \rnode{a1}{\textit{2 * \textpi{} * r}} or \rnode{a2}{\textit{\textpi{} * r\textsuperscript{2}}} using the correct constant instead of hard-coded \rnode{a3}{NIH} value
+\item<3-> \rnode{b}{\textit{τ=2π}}
+\item<4-> \rnode{c}{Euler's} number \ldots
+\item<5-> Outputs \rnode{d}{\texttt{0.5}}\texttt{, }\rnode{e}{\texttt{<1/7>}}
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a1}{A1}\nccurve[linecolor=teal]{->}{a2}{A2}\nccurve[linecolor=teal]{->}{a3}{A3}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}
+
+\begin{frame}[fragile]{Basic operations}
+\begin{block}<1->{Numbers -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+say $t <=> $e; # (*@\pnode(0,0){A}{}@*)<, <=, ==, >=, >, !=, <=>
+say π+e;       # +, -, *, /, (*@\pnode(0,0){B}{}@*)%, **, %%
+say $p++, " -- ", ++$p;      # (*@\pnode(0,0){C}{}@*)++, --, -, +, ^, ?, ~
+say 1 +< 4;    # +<, +>, (*@\pnode(0,0){D}{}@*)+&, +|
+say π(*@\pnode(0,0){E}{}@*)²;        # ¹²³⁴⁵⁶⁷⁸⁹⁰
+say 2¹²(*@\pnode(0,0){F}{}@*)⁷-1;    # all directly appended superscripted belong together like any number
+\end{lstlisting}
+
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{comparison} operators
+\item<3-> binary \rnode{b}{arithmetic} operators
+\item<4-> \rnode{c}{prefix} -- postfix operators \ldots and other unary operators
+\item<5-> shift left as shortcut for power of 2 - binary \rnode{d}{bitwise} operators
+\item<6-> direct power of \rnode{e}{arbitary} base
+\item<7-> can be \rnode{f}combined to a very large prime number
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{e}{E}}
+\uncover<7>{\nccurve[linecolor=teal]{->}{f}{F}}
+\end{frame}
+

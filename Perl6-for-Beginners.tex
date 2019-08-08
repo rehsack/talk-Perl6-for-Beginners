@@ -1,0 +1,277 @@
+\documentclass[ngerman,xcolor={table,dvipsnames},smaller,compress,hyperref={bookmarks,colorlinks}]{beamer}%,handout
+
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{mathpazo}
+\usepackage{textcomp}
+\usepackage{enumerate}
+\usepackage{textgreek}
+\usepackage{xfrac}
+%\usepackage[hyphens]{url}
+
+%\usepackage{auto-pst-pdf}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{pst-node}
+\usepackage{pst-uml}
+\usepackage{pst-tree}
+\usepackage{pst-blur}
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{pifont}
+
+% for multipage tables (xtab or longtable
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{booktabs}
+\usepackage[tableposition=top]{caption}
+
+\usepackage{hyperref}
+\usepackage[hyphenbreaks]{breakurl}
+
+\lstdefinelanguage{Perl6}%
+  {morekeywords={eager,hyper,race,my,say,dd},%
+   sensitive,%
+   morecomment=[l]\#,%
+   morestring=[b]",%
+   morestring=[b]',%
+   MoreSelectCharTable=%
+      \lst@ReplaceInput{\$\#}{\lst@ProcessOther\$\lst@ProcessOther\#}%
+  }[keywords,comments,strings]%
+
+\title{Perl6 for Beginners}
+\author{Jens Rehsack}
+\institute[Niederrhein.PM]{Niederrhein Perl Mongers}
+\date{European Perl Conference 2019}
+
+\usetheme[secheader]{Boadilla}
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\perlfilename}[1]{{\color{cyan}{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\xsfilename}[1]{{\color{olive}{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\hfilename}[1]{{\color{olive}{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\cfilename}[1]{{\color{magenta}{\textit{\begingroup \urlstyle{sf}\Url{#1}}}}}
+\newcommand{\variable}[1]{{\color{violet}{\textsf{#1}}}}
+\newcommand{\variablew}[1]{{{\textsf{#1}}}}
+\newcommand{\command}[1]{'\texttt{#1}'}
+
+\def\signed #1{{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
+   \hbox{}\nobreak\hfil(#1)%
+   \parfillskip=0pt \finalhyphendemerits=0 \endgraf}}
+ 
+\newsavebox\mybox
+\newenvironment{aquote}[1]
+   {\savebox\mybox{#1}\begin{quotation}}
+   {\signed{\usebox\mybox}\end{quotation}}
+
+\makeatletter
+\makeatother
+
+\begin{document}
+
+\psset{angleA=90,angleB=-90}
+\lstset{language=Perl,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{Maroon},
+        commentstyle=\color{Blue}, 
+        stringstyle=\color{Green},
+        showstringspaces=false}
+
+\lstset{
+    literate=%
+        {Ö}{{\"O}}1
+        {Ä}{{\"A}}1
+        {Ü}{{\"U}}1
+        {ß}{{\ss}}2
+        {ü}{{\"u}}1
+        {ä}{{\"a}}1
+        {ö}{{\"o}}1
+        {°}{{\textdegree}}1
+        {α}{{\textalpha}}1
+        {β}{{\textbeta}}1
+        {γ}{{\textgamma}}1
+        {δ}{{\textdelta}}1
+        {ε}{{\textepsilon}}1
+        {ζ}{{\textzeta}}1
+        {η}{{\texteta}}1
+        {θ}{{\texttheta}}1
+        {ι}{{\textiota}}1
+        {κ}{{\textkappa}}1
+        {λ}{{\textlambda}}1
+        {μ}{{\textmugreek}}1
+        {ν}{{\textnu}}1
+        {ξ}{{\textxi}}1
+        {ο}{{\textomikron}}1
+        {π}{{\textpi}}1
+        {ρ}{{\textrho}}1
+        {σ}{{\textsigma }}1
+        {τ}{{\texttau}}1
+        {υ}{{\textupsilon}}1
+        {φ}{{\textphi}}1
+        {χ}{{\textchi}}1
+        {ψ}{{\textpsi}}1
+        {ω}{{\textomega}}1
+        {Α}{{\textAlpha}}1
+        {Β}{{\textBeta}}1
+        {Γ}{{\textGamma}}1
+        {Δ}{{\textDelta}}1
+        {Ε}{{\textEpsilon}}1
+        {Ζ}{{\textZeta}}1
+        {Η}{{\textEta}}1
+        {Θ}{{\textTheta}}1
+        {Ι}{{\textIota}}1
+        {Κ}{{\textKappa}}1
+        {Λ}{{\textLambda}}1
+        {Μ}{{\textMu}}1
+        {Ν}{{\textNu}}1
+        {Ξ}{{\textXi}}1
+        {Ο}{{\textOmikron}}1
+        {Π}{{\textPi}}1
+        {Ρ}{{\textRho}}1
+        {Σ}{{\textSigma}}1
+        {Τ}{{\textTau}}1
+        {Υ}{{\textUpsilon}}1
+        {Φ}{{\textPhi}}1
+        {Χ}{{\textChi}}1
+        {Ψ}{{\textPsi}}1
+        {Ω}{{\textOmega}}1
+        {ς}{{\textvarsigma}}1
+        {φ}{{\straightphi}}1
+        {θ}{{\scripttheta}}1
+        {θ}{{\straighttheta}}1
+        {ε}{{\straightepsilon}}1
+        {¹}{{\textsuperscript{1}}}1
+        {²}{{\textsuperscript{2}}}1
+        {³}{{\textsuperscript{3}}}1
+        {⁴}{{\textsuperscript{4}}}1
+        {⁵}{{\textsuperscript{5}}}1
+        {⁶}{{\textsuperscript{6}}}1
+        {⁷}{{\textsuperscript{7}}}1
+        {⁸}{{\textsuperscript{8}}}1
+        {⁹}{{\textsuperscript{9}}}1
+        {⁰}{{\textsuperscript{0}}}1
+        {½}{{\sfrac{1}{2}}}1
+}
+
+
+\AtBeginPart{\begin{frame}<beamer> \frametitle{Overview} \partpage \tableofcontents[current] \end{frame}}
+
+\frame{\maketitle}
+
+\part{Introduction}
+
+\section{Introduction}
+
+\subsection{Motivation}
+
+\begin{frame}[fragile]{Motivation}
+\begin{block}<1->{Collecting (Lost) People}
+\begin{itemize}
+\item<1-> Perl 6 is in development for more than 10 years and it has a lot of
+          impressive new features.
+\item<2-> The language syntax evolved with the language capabilities and the
+          evolved mindset.
+\item<3-> Getting snippets of code from experienced Perl 6 developers might create
+          more (new) questions than answers (if any).
+\item<4-> This talk attempts to start at the beginning and collects everyone
+          on the way.
+\end{itemize}
+\end{block}
+
+\begin{block}<5->{Goals}
+At the end of the talk, attendees should be able to write small Perl 6 code
+and understand given examples.
+\end{block}
+\end{frame}
+
+\subsection{Is \& Isn't}
+
+\begin{frame}[fragile]{What Perl 6 Is}
+\begin{block}<1->{Perl 6 Is \ldots}
+\begin{itemize}
+\item<1-> a modern language of the Perl family
+\item<2-> a language with a fast growing module ecosystem
+\item<3-> a development environment with built-in support for asynchronouos I/O,
+          auto parallelization, multiple syntaxes in one program, \ldots
+\item<4-> a name of a open minded, strong collaborating community
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{What Perl (6) Is not}
+\begin{block}<1->{Perl 6 Isn't \ldots}
+\begin{itemize}
+\item<1-> Perl 4
+\item<2-> Perl 5
+\item<3-> intended to be a drop-in replacement of any of them
+\item<4-> continuity of ''Status Quo''
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{What Rakudo Is}
+\begin{block}<1->{Rakudo Is \ldots}
+\begin{itemize}
+\item<1-> a Perl 6 compiler (targeting Moar VM and JVM)
+\item<2-> Perl 6 Specification conform
+\item<3-> one of many Perl 6 implementations
+\end{itemize}
+\end{block}
+
+\begin{block}<4->{Rakudo* Is \ldots}
+\begin{itemize}
+\item<4-> a bundle of the Perl 6 compiler and curated Perl 6 ''core'' modules
+\item<5-> what you might call ''perl''
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Starting}
+
+\input{Perl6-for-Beginners-Install.tex}
+
+\section{Example Code}
+
+\input{Perl6-for-Beginners-Run.tex}
+\input{Perl6-for-Beginners-Oneliners.tex}
+\input{Perl6-for-Beginners-Strings.tex}
+\input{Perl6-for-Beginners-Numbers.tex}
+\input{Perl6-for-Beginners-Conditionals.tex}
+\input{Perl6-for-Beginners-Loops.tex}
+
+
+%\begin{frame}[fragile]{Literals}
+%\begin{block}<1->{Numbers -- Synopsis}
+%\small
+%\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+%my $p = 3.14159265; $p = pi; $p = π;
+%\end{lstlisting}
+%\end{block}
+%
+%\begin{itemize}
+%\item<2-> \rnode{a}{}
+%\item<3-> 
+%\item<4-> 
+%\item<5-> 
+%\end{itemize}
+%\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+%\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+%\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+%\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+%\end{frame}
+
+\section{Thank you}
+
+% THANKS
+\begin{frame}[fragile]{Thank You For Listening}
+\begin{block}<1->{Questions?}
+Jens Rehsack \textless{}\href{mailto:rehsack@cpan.org}{rehsack@cpan.org}\textgreater{} \\
+Cologne
+\end{block}
+\end{frame}
+
+\end{document}
+

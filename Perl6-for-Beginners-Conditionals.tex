@@ -1,0 +1,131 @@
+\subsection{Conditionals}
+
+\begin{frame}[fragile]{Conditionals - If}
+\begin{block}<1->{If -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+i(*@\pnode(0,0){A}{}@*)f True { say "Yes" } el(*@\pnode(0,0){B}{}@*)se { say "No" };
+if incisors and swimming (*@\pnode(0,0){C}{}@*){
+    i(*@\pnode(0,0){D}{}@*)f    broad_tail     { say "Beaver (Castor)" }
+    elsi(*@\pnode(0,0){E}{}@*)f flattened_tail { say "Muskrat" }
+    els(*@\pnode(0,0){F}{}@*)e  small_tail     { say "Coypu" }
+}
+say "\c[LIFE WITHOUT ALFA ROMEO]" un(*@\pnode(0,0){G}{}@*)less Alfa-Driver;
+say "\c[LIFE WITH ALFA ROMEO]" i(*@\pnode(0,0){H}{}@*)f Alfa-Driver;
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> A very ordinary \rnode{a}{\texttt{if}} \ldots \rnode{b}{\texttt{else}} line
+\item<3-> A larger \rnode{c}{\texttt{if}}-block containing some \rnode{d}{\texttt{if}}, \rnode{e}{\texttt{elsif}} (not, but \ldots) and finally an \rnode{f}{\texttt{else}}
+\item<4-> statement modifier printing \includegraphics[height=\baselineskip]{Life-without-Alfa-Romeo.eps} for \rnode{g}{unfortunate} ones (currently missing in unicode)
+\item<5-> statement modifier printing \includegraphics[height=\baselineskip]{Life-with-Alfa-Romeo.eps} for \rnode{h}{fortunate} ones (currently missing in unicode, too)
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{c}{C}\nccurve[linecolor=teal]{->}{d}{D}\nccurve[linecolor=teal]{->}{e}{E}\nccurve[linecolor=teal]{->}{f}{F}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{g}{G}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{h}{H}}
+\end{frame}
+
+\begin{frame}[fragile]{Conditionals - With}
+\begin{block}<1->{With -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+with "abcdefg".index(("a".."g").roll) { .s(*@\pnode(0,0){A}{}@*)ay }
+without (Any, True).(*@\pnode(0,0){B1}{}@*)roll { say "Roll (*@\pnode(0,0){B2}{}@*)again" }
+sub prime-only { my $v = (^2019).pick;
+  $v.is-prime || return Any; return $v }
+with prime-only() -> (*@\pnode(0,0){C}{}@*)$n { say "$n is prime" }
+my $s = ("a".."g").roll;
+with(*@\pnode(0,0){D}{}@*)   $s.index("a") { say "say <b> now" }
+o(*@\pnode(0,0){E}{}@*)rwith $s.index("b") { say "did you say <a>?" }
+else   { say "neither <a> nor <b> was said" }
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{says} a number from \texttt{0 \ldots 6}
+\item<3-> \rnode{b1}{50\%} chance to get \rnode{b2}{\textit{Roll again}}
+\item<4-> way lower chance to see \textit{\ldots is prime} using \rnode{c}{pointy block} syntax together with \texttt{with}
+\item<5-> analogous to \texttt{if \ldots elsif \ldots} you can concatenate multiple tests using \texttt{\rnode{e}{o}rwith} after \rnode{d}{\texttt{with}}
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b1}{B1}\nccurve[linecolor=teal]{->}{b2}{B2}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}
+
+\begin{frame}[fragile]{Conditionals - Given/When}
+\begin{block}<1->{Given -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+given  (2, 3, 7, "Any", Any).pick {
+  when 2     { say $_ * 3 * 7; }(*@\pnode(0,0){A}{}@*)
+  when 3     { say $_ * 2 * 7; }(*@\pnode(0,0){B}{}@*)
+  when 7     { say $_ * 2 * 3; }(*@\pnode(0,0){C}{}@*)
+  when "Any" { say "Any" }(*@\pnode(0,0){D}{}@*)
+  default    { say "(*@\pnode(0,0){E}{}@*)Hmpf"; }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> 60\% chance to get the answer to the ultimate question of life, the universe, and everythin\rnode{a}{g}
+\item<3-> 20\% chance to get \textit{\rnode{d}{Any}} answer
+\item<4-> 20\% chance to \rnode{e}{disappoint} the automate
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}\nccurve[linecolor=teal]{->}{a}{B}\nccurve[linecolor=teal]{->}{a}{C}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}
+
+\begin{frame}[fragile]{Conditionals - Given/When}
+\begin{block}<1->{Given -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+given  (2, 3, 7, "Any", Any).pick {
+  when Int   (*@\pnode(0,0){A}{}@*){ say "Int found, computing ..."; }
+  when 2     { say $_ * 3 * 7; }(*@\pnode(0,0){B1}{}@*)
+  when 3     { say $_ * 2 * 7; }(*@\pnode(0,0){B2}{}@*)
+  when 7     { say $_ * 2 * 3; }(*@\pnode(0,0){B3}{}@*)
+  when Str   (*@\pnode(0,0){C}{}@*){ say "Str found, checking ..."; }
+  when "Any" { say "Any" }(*@\pnode(0,0){D}{}@*)
+  default    { say "(*@\pnode(0,0){E}{}@*)Hmpf"; }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<1-> The block surrounding \texttt{when} or \texttt{default} statements will be left immediately after leaving the sub-block after \texttt{when} or \texttt{default} statement.
+\item<2-> Read: \rnode{a}{1st} \texttt{when} block skips \rnode{b1}{2nd}, \rnode{b2}{3rd} and \rnode{b3}{4th} \texttt{when} block\uncover<3->{,\rnode{c}{5th} \texttt{when} block skips \rnode{d}{6th} \texttt{when} block}
+\item<4-> \texttt{when} statement modifiers won't cause leaving a block
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}\nccurve[linecolor=teal]{->}{b1}{B1}\nccurve[linecolor=teal]{->}{b2}{B2}\nccurve[linecolor=teal]{->}{b3}{B3}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{c}{C}\nccurve[linecolor=teal]{->}{d}{D}}
+\end{frame}
+
+\begin{frame}[fragile]{Conditionals - Proceed/Succeed}
+\begin{block}<1->{Given -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+given  (2, 3, 7, "Any", Any).pick {
+  when Int   { print "Int found, computing ..."; proc(*@\pnode(0,0){A}{}@*)eed; }
+  when 2     { say $_ * 3 * 7; }(*@\pnode(0,0){B1}{}@*)
+  when 3     { say $_ * 2 * 7; }(*@\pnode(0,0){B2}{}@*)
+  when 7     { say $_ * 2 * 3; }(*@\pnode(0,0){B3}{}@*)
+  when Str   { say "Str found, checking ..."; proc(*@\pnode(0,0){C}{}@*)eed; }
+  when "Any" { say "Any" }(*@\pnode(0,0){D}{}@*)
+  default    { su(*@\pnode(0,0){E}{}@*)cceed; say "Hmpf"; }
+}
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2->  \rnode{a}{Now} there is a 60\% chance to get the answer to the ultimate question of life, the universe, and everything \textbf{computed}
+\item<3-> 20\% to get \rnode{c}{now} a checked \textit{Any} - \texttt{Str} as output
+\item<4-> In \texttt{Any} other case (\texttt{default}), the automate \rnode{e}{immediately succeeds} and keeps its disappointment for itself
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}

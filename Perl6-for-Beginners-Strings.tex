@@ -1,0 +1,160 @@
+\subsection{Strings}
+
+\begin{frame}[fragile]{Defining Strings}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+dd (*@\pnode(0,0){A1}{}@*)'I can see $(*@\pnode(0,0){A2}{}@*)$ in your eyes';
+dd (*@\pnode(0,0){B}{}@*)"I am N° $*(*@\pnode(0,0){C}{}@*)PID";
+my $s = "Haa"; $s(*@\pnode(0,0){D}{}@*)++; say "Interpolated <$(*@\pnode(0,0){E}{}@*)s>!";
+
+dd q(*@\pnode(0,0){F}{}@*):to/TERMINATOR(*@\pnode(0,0){G}{}@*)/
+Lorem ipsum dolor sit amet, consectetur adipisici elit,
+sed eiusmod tempor incidunt ut labore et dolore magna
+aliqua.
+TERMINATOR
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> This \rnode{a1}{encompasses} a literal string -- the string will be processed \rnode{a2}{exactly} as written.
+\item<3-> That string \rnode{b}{encompassing} causes interpolation. \uncover<4->{Mind the \rnode{c}{\texttt{\$*PID}} instead of the \texttt{\$\$} from Perl 5 or Bourne Shell constructs.}
+\item<5->  \rnode{d}{Increments} \texttt{Haa} \textrightarrow{}  \texttt{Hab} and prints \textit{Interpolated  \rnode{e}{\textless{}Hab\textgreater{}}!}
+\item<6-> \rnode{g}{Heredocs} are included into \texttt{\rnode{f}{q}} and \texttt{qq}, respectively
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a1}{A1}\nccurve[linecolor=teal]{->}{a2}{A2}}
+\uncover<3-4>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}\nccurve[linecolor=teal]{->}{e}{E}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{f}{F}\nccurve[linecolor=teal]{->}{g}{G}}
+\end{frame}
+
+\begin{frame}[fragile]{C special characters \& substr}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $s = "(*@\pnode(0,0){A1}{}@*)\a, \b, \e, \f, \n, \r, \t, \\, \x1b, \cJ(*@\pnode(0,0){A2}{}@*)";
+
+my $bell = substr($s, (*@\pnode(0,0){B}{}@*)0, 1);     dd $bell;
+my $nl   = substr($s, (*@\pnode(0,0){C}{}@*)*-1, 1);   dd $nl;
+my $tab  = substr($s, (*@\pnode(0,0){D}{}@*)18..18);   dd $tab;
+my $lf   = substr($s, 15, (*@\pnode(0,0){E}{}@*)*-12); dd $lf;
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \ldots well known \rnode{a}{list of special characters} for terminal controlling.
+\item<3-> Getting the \rnode{b}{first} character (bell)
+\item<4-> Getting the \rnode{c}{last} character (newline)\uncover<5->(how many newlines are in that string?)
+\item<6-> Fetching a \rnode{d}{range} of 1 character containing a tabulator special char from the middle
+\item<7-> Beware \rnode{e}{negative} addressing of \texttt{to} --- getting line feed character
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A1}\nccurve[linecolor=teal]{->}{a}{A2}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4-5>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<7>{\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}
+
+\begin{frame}[fragile]{''Attributes'' of Strings}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $s = "\c[WAVING WHITE FLAG, VARIATION SELECTOR-16,
+            ZERO WIDTH JOINER, RAINBOW]";
+say $s;
+say "chars: ", (*@\pnode(0,0){A}{}@*)$s.chars;
+say "codes: ", (*@\pnode(0,0){B}{}@*)$s.codes;
+say "encode.bytes: ", (*@\pnode(0,0){C}{}@*)$s.encode.bytes;
+say "encode('utf-16').bytes: ", (*@\pnode(0,0){D}{}@*)$s.encode('utf-16').bytes;
+\end{lstlisting}
+\end{block}
+
+\ldots on a typical unicode character \uncover<2->{(\includegraphics[height=\baselineskip]{rainbow-flag-apple.eps})}.
+\begin{itemize}
+\item<3-> It is \texttt{\rnode{a}{1}} character
+\item<4-> containing \texttt{\rnode{b}{4}} codes
+\item<5-> using \texttt{\rnode{c}{14}} bytes in default (UTF-8) encoding
+\item<6-> or \texttt{\rnode{d}{12}} bytes in UTF-16 encoding.
+\end{itemize}
+\uncover<3>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<6>{\nccurve[linecolor=teal]{->}{d}{D}}
+\end{frame}
+
+\begin{frame}[fragile]{String quoting}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $l = (*@\pnode(0,0){A}{}@*)Q (SELECT COUNT(*@\pnode(0,0){B}{}@*)(*) FROM users);
+my @f = (*@\pnode(0,0){C}{}@*)Q:(*@\pnode(0,0){D}{}@*)x:w(*@\pnode(0,0){E}{}@*)w/l(*@\pnode(0,0){F}{}@*)s/;
+my $e = (*@\pnode(0,0){G}{}@*)q<swept volume (*@\pnode(0,0){H}{}@*)\>(*@\pnode(0,0){I}{}@*) turbocharger>
+my $i = (*@\pnode(0,0){J}{}@*)qq:!(*@\pnode(0,0){k}{}@*)h[%(*@\pnode(0,0){l}{}@*)0{@f.elems.chars}d: %s]
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{Literal string} -- with \rnode{b}{nested delimiters}.
+\item<3-> \rnode{c}{Literal} \rnode{f}{string} \textrightarrow{} \rnode{d}{executed} \textrightarrow{} \rnode{e}{split on words (with quote protection)}
+\item<4-> \rnode{g}{Almost literal} string, but allows \rnode{h}{escaping} (e.g. to ''fix'' \rnode{i}{delimiters used} in string)
+\item<5-> Fully \rnode{j}{interpolated} string -- \rnode{k}{except hashes} for this \rnode{l}{special} case.
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{c}{C}\nccurve[linecolor=violet]{->}{d}{D}\nccurve[linecolor=violet]{->}{e}{E}\nccurve[linecolor=teal]{->}{f}{F}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{g}{G}\nccurve[linecolor=violet]{->}{h}{H}\nccurve[linecolor=violet]{->}{i}{I}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{j}{J}\nccurve[linecolor=violet]{->}{k}{K}\nccurve[linecolor=red]{->}{l}{L}}
+\end{frame}
+
+\begin{frame}[fragile]{Working with strings}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $s = chr(45) x 80; say (*@\pnode(0,0){A}{}@*)$s;
+say "\c[WAVING WHITE FLAG, VARIATION SELECTOR-16,
+        ZERO WIDTH JOINER, RAINBOW]".(*@\pnode(0,0){B}{}@*)ords;
+my ($s1, $s2);
+$s1 = 'Hello '; $s2 = "World\n";
+print $s1 (*@\pnode(0,0){C}{}@*)~ $s2;
+$s = "heLlo wOrld";
+say "uc: ", $s.(*@\pnode(0,0){D}{}@*)uc, " -- tc: ", $s.(*@\pnode(0,0){E}{}@*)tc, " -- lc: ", $s.(*@\pnode(0,0){F}{}@*)lc;
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> Outputs a textart line of \texttt{\rnode{a}{80 '-'}}
+\item<3-> Tells all \rnode{b}{ordinal} values of the four codepoints of \texttt{\$s} (127987, 65039, 8205, 127752) % 🏳️‍🌈
+\item<4-> \rnode{c}{Concatenates} the most important strings when learning a new language
+\item<5-> \rnode{d}{UPPER} cases, \rnode{e}{Title} cases or \rnode{f}{lower} cases \lstinline[language=Perl6,inputencoding=latin9]!"heLlo wOrld"!
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}\nccurve[linecolor=teal]{->}{e}{E}\nccurve[linecolor=teal]{->}{f}{F}}
+\end{frame}
+
+\begin{frame}[fragile]{Match and Replacing}
+\begin{block}<1->{Strings -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $r = "expletive expression";
+$r ~~ s/expletive/(*@\pnode(0,0){A}{}@*)regular/;
+my $s = "Hello world";
+my $g = (*@\pnode(0,0){B}{}@*)~$/ given $s ~~ m/^(\w+)/;
+(my $gpc = $s) ~~ (*@\pnode(0,0){C}{}@*)tr/oleH/terG/;
+$gpc.substr-rw(*@\pnode(0,0){D}{}@*)(6,5) = "PerlCon";
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{Text processing}!!! Not swearwords \ldots
+\item<3-> What's our \rnode{b}{greeting} word?
+\item<4-> \textit{Hello} \rnode{c}{\textrightarrow{}} \textit{Greet}
+\item<5-> \textbf{Greet \rnode{d}{PerlCon}} 
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+\end{frame}
+

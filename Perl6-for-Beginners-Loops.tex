@@ -1,0 +1,121 @@
+\subsection{Conditionals}
+
+\begin{frame}[fragile]{Loops}
+\begin{block}<1->{for -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my @l = (^10).pick(3);
+for(*@\pnode(0,0){A}{}@*) @l { .(*@\pnode(0,0){B}{}@*)say }
+for @l <(*@\pnode(0,0){C}{}@*)-> $n { ++$n }
+for @l ->(*@\pnode(0,0){D}{}@*) $a, $b = "n/a" { say "a: $a, b: $b"; }
+@l = (^10).pick(4).sort;
+for @l { say "(*@\pnode(0,0){E}{}@*)$^y > $^x" }
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{loop} over elemenst in \texttt{@l}, put the current one into \texttt{\$\_} and execute the block running \rnode{b}{\texttt{\$\_.say}}
+\item<3-> run a similar loop and write results \rnode{c}{back}
+\item<4-> just another \rnode{d}{pointy block} with default value \ldots -- outputs something like \texttt{\\
+2, 7 \\
+8, n/a}
+\item<5-> loops over \texttt{@l} taking \rnode{e}{two elements} at once and put them into \texttt{(\$x, \$y)} -- alphabetically ordered
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{d}{D}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{e}{E}}
+\end{frame}
+
+\begin{frame}[fragile]{Loops}
+\begin{block}<1->{loop -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+(*@\pnode(0,0){A}{}@*)loop (my $i = 0; $i < 10; ++$i) { $i.say }
+loop (*@\pnode(0,0){B}{}@*){ say 'forever' }
+my @l =(*@\pnode(0,0){C}{}@*) loop (my $i = 10; $i < 20; ++$i) { $i + $i - 1 }
+say @l;
+(loop (my $i = 10; $i < 20; ++$i) { $i * 2 - 1 }).(*@\pnode(0,0){D}{}@*)say;
+\end{lstlisting}%$
+\end{block}
+
+\begin{itemize}
+\item<2-> \rnode{a}{loop} as known from C programming language
+\item<3-> easy to write \rnode{b}{infinite} loops - no need for hacks
+\item<4-> loops can be used to produce \rnode{c}{results} \ldots
+\item<5-> \ldots which can be processed \rnode{d}{immediately}
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{d}{D}}
+\end{frame}
+
+\begin{frame}[fragile]{Loops}
+\begin{block}<1->{while -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $i = 1; my $p = 1;
+while $i <(*@\pnode(0,0){A}{}@*) 5 {(*@\pnode(0,0){B1}{}@*) ++$i if (++$p).is-prime (*@\pnode(0,0){B2}{}@*)}
+say "$p is the {$i}th prime";
+my $x = 1;
+"{$x**2} <= {2**$x}".say and ++$x whi(*@\pnode(0,0){C}{}@*)le $x**2 <= 2**$x;
+\end{lstlisting}%$
+\end{block}
+
+\begin{itemize}
+\item<2-> \texttt{while} runs the loop as long as the \rnode{a}{\textit{expression}} evaluates to \texttt{true}
+\item<3-> \textit{expression} is evaluated before the block is executed\uncover<4->{ -- might result in entire \rnode{b}{block} is skipped}
+\item<5-> \texttt{while} can be used as statement \rnode{c}{modifier}, too
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{b}{B1}\nccurve[linecolor=teal]{->}{b}{B2}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{c}{C}}
+\end{frame}
+
+\begin{frame}[fragile]{Loops}
+\begin{block}<1->{until -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $i = 1; my $p = 1;
+until $i (*@\pnode(0,0){A}{}@*)> 5 {(*@\pnode(0,0){B1}{}@*) ++$i if (++$p).is-prime (*@\pnode(0,0){B2}{}@*)}
+say "$p is the {$i}th prime";
+my $x = 1;
+$x++ un(*@\pnode(0,0){C}{}@*)til "$x".chars > 2;
+\end{lstlisting}%$
+\end{block}
+
+\begin{itemize}
+\item<2-> \texttt{until} runs the loop as long as the \rnode{a}{\textit{expression}} evaluates to \texttt{false}
+\item<3-> \textit{expression} is evaluated before the block is executed\uncover<4->{ -- might result in entire \rnode{b}{block} is skipped}
+\item<5-> \texttt{until} can be used as statement \rnode{c}{modifier}, too
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{b}{B1}\nccurve[linecolor=teal]{->}{b}{B2}}
+\uncover<5>{\nccurve[linecolor=teal]{->}{c}{C}}
+\end{frame}
+
+\begin{frame}[fragile]{Loops}
+\begin{block}<1->{repeat \ldots while/until -- Synopsis}
+\small
+\begin{lstlisting}[language=Perl6,inputencoding=utf8,escapeinside={(*@}{@*)}]
+my $i = 0;
+repeat { $i++ } while $i (*@\pnode(0,0){A}{}@*)< 10;
+say $i;
+repeat while $i (*@\pnode(0,0){B}{}@*)< 10 { $i++ };
+say $i;
+repeat { $i++ } until "$i".chars (*@\pnode(0,0){C}{}@*)> 2;
+say $i;
+\end{lstlisting}
+\end{block}
+
+\begin{itemize}
+\item<2-> \texttt{repeat} runs the block at least once -- \rnode{a}{\textit{expression}} is evaluated after the block has been run
+\item<3-> \texttt{repeat \ldots while} runs as long as the expression evaluates to \rnode{b}{\texttt{true}}
+\item<4-> \texttt{repeat \ldots until} runs as long as the expression evaluates to \rnode{c}{\texttt{false}}
+\end{itemize}
+\uncover<2>{\nccurve[linecolor=teal]{->}{a}{A}}
+\uncover<3>{\nccurve[linecolor=teal]{->}{b}{B}}
+\uncover<4>{\nccurve[linecolor=teal]{->}{c}{C}}
+\end{frame}
+

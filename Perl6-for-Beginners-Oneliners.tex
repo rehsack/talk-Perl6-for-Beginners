@@ -1,0 +1,27 @@
+\subsection{One Liners}
+
+\begin{frame}[fragile]{Killer App: One Liners}
+\begin{block}<1->{Doing One Liners with Perl 6}
+Perl has always been famous for it's one-liners. Let's continue \ldots
+\begin{itemize}
+\item<1-> Strip trailing whitespaces \lstinline[language=sh,inputencoding=latin9]!perl6 -pe 's/\s*$//'!
+Looks familiar, doesn't it?
+\item<2-> Most use is very likely the line ending tidying - done easily in Perl 6 by \lstinline[language=sh,inputencoding=latin9]!perl6 -pe ''!
+Yes - it's completely built-in. An empty by-line job does \lstinline[language=sh,inputencoding=latin9]!perl5  -p -i -e 's/\012?\015/\n/g'!
+\item<3-> Another famous job is filtering, like \lstinline[language=sh,inputencoding=latin9]!perl6 -ne '.say if .is-prime'!
+\item<4-> Adding line numbers to some inputfile needed? How about
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+perl6 -ne 'for lines.kv -> $no, $l {\
+say sprintf("%04d: %s", $no, $l) }'
+\end{lstlisting}
+\item<5-> Maybe a bit more flexibility in width of line-numbers?
+\begin{lstlisting}[language=sh,inputencoding=latin9]
+perl6 -e 'my @l = lines; \
+my $fmt = "\%0" ~ @l.elems.chars ~ "d: %s"; \
+for ^@l.elems {say sprintf($fmt, $_+1, @l[$_]) }'
+\end{lstlisting}
+\end{itemize}
+\end{block}
+\end{frame}
+
+
